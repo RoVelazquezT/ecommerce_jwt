@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Login</title>
+ 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset básico */
+        *, *:before, *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(245, 247, 238);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            /* Flexbox para centrar todo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evita scroll si las bolas se salen */
+        }
+
+        /* Contenedor relativo para las bolas decorativas */
+        .background {
+            position: relative;
+            width: 100%;
+            max-width: 430px;
+            height: 520px;
+            /* Las bolas estarán detrás del form */
+            z-index: 0; 
+        }
+
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .shape:first-child {
+            background: linear-gradient(rgb(92, 240, 30), rgb(244, 250, 29));
+            left: -40px; /* Ajustado para móviles */
+            top: -40px;
+        }
+
+        .shape:last-child {
+            background: linear-gradient(to right, rgb(0, 255, 0), rgb(255, 255, 0));
+            right: -40px;
+            bottom: -40px;
+        }
+
+        form {
+            /* Posicionamiento y tamaño responsive */
+            width: 90%; 
+            max-width: 400px;
+            height: auto; /* Altura automática según contenido */
+            min-height: 520px;
+            
+            /* Estilo "Glassmorphism" */
+            background-color: rgba(255,255,255,0.13);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(8,7,16,0.6);
+            padding: 50px 35px;
+            
+            /* Centrado absoluto sobre .background */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        form * {
+            color: rgb(22, 22, 22);
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgb(218, 218, 218);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: rgb(249, 255, 230);
+            color: rgb(22, 22, 22);
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgb(41, 39, 50);
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            transform: scale(1.02);
+        }
+
+        /* Mensaje de error/éxito */
+        #form-message {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            z-index: 2;
+        }
+
+        /* Media Query para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .shape {
+                height: 150px;
+                width: 150px;
+            }
+            form {
+                padding: 30px 20px;
+                min-height: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <form id="login-form">
+        <h3>Login Here</h3>
+
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Usuario">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Contraseña">
+
+        <button type="submit">Ingresar</button>
+    </form>
+    
+    <div id="form-message"></div>
+	
+	<script th:src="@{/js/scriptLogin.js}"></script>
+</body>
+</html>
